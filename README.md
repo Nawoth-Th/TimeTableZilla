@@ -4,7 +4,7 @@
 
 Exclusively designed for the **SLIIT community**, **TimeTableZilla** transforms your raw HTML timetables into clear, customizable calendars with Google Tasks sync and print-perfect layouts.
 
-![TimeTableZilla Screen](public/icon.png)
+![TimeTableZilla Screen](public/logo-bg-fill.png)
 
 ## 🌟 Features
 
