@@ -1,140 +1,86 @@
-# Timetable Setup App
+# TimeTableZilla 🦖
 
-A web application for parsing, filtering, and viewing university timetables from HTML exports. Upload your timetable HTML file, select your semester, group, and subgroup, and instantly view your personalized schedule.
+**Unleash the true potential of your schedule.**
 
-## Features
+Exclusively designed for the **SLIIT community**, **TimeTableZilla** transforms your raw HTML timetables into clear, customizable calendars with Google Tasks sync and print-perfect layouts.
 
-- **HTML Upload**: Upload your university timetable in HTML format
-- **Smart Parsing**: Automatically extracts semesters, groups, and subgroups from timetable data
-- **Semester Selection**: Choose from predefined semesters (Y1S1 through Y4S2)
-- **Group & Subgroup Filtering**: Dynamically populated dropdowns based on your timetable
-- **Structured View**: Display timetable entries organized by day and time with module details
-- **Responsive Design**: Works seamlessly on desktop and mobile devices
+![TimeTableZilla Screen](public/icon.png)
 
-## Getting Started
+## 🌟 Features
+
+- **HTML Parsing**: Upload your raw university HTML timetable and let Zilla do the rest.
+- **Smart Filtering**: Auto-detects Semesters, Groups, and Subgroups.
+- **Dynamic Calendar View**: View your schedule in a clean, responsive weekly grid.
+- **Manual Editing**: Add, edit, or delete classes manually to fix parser errors or add external events.
+- **Google Tasks Sync**: One-click sync to your Google Tasks to keep track of every class.
+- **Print / PDF Export**: Generate a beautifully formatted PDF tailored for printing (A4 Landscape).
+- **Module Coloring**: Visual distinction between different modules.
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- **Node.js** (v18+)
+- **pnpm** (recommended) or npm
+- **Google Cloud Console Account** (for Sync features)
 
 ### Installation
 
-1. Clone or download this project
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Run the development server:
-   ```bash
-   npm run dev
-   ```
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
+1.  **Clone the repository**:
 
-## Usage
+    ```bash
+    git clone https://github.com/yourusername/timetablezilla.git
+    cd timetablezilla
+    ```
 
-### Step 1: Upload Timetable
-- Click the upload area or drag and drop an HTML file containing your university timetable
-- The file must be in HTML format (`.html` or `.htm`)
+2.  **Install dependencies**:
 
-### Step 2: Select Semester
-- Choose your semester from the dropdown
-- Supported semesters: Y1S1, Y1S2, Y2S1, Y2S2, Y3S1, Y3S2, Y4S1, Y4S2
+    ```bash
+    pnpm install
+    # or
+    npm install
+    ```
 
-### Step 3: Select Group
-- The available groups will automatically populate based on the selected semester
-- Choose your group from the dropdown
+3.  **Configure Environment**:
+    Create a `.env.local` file in the root directory and add your Google Client ID:
 
-### Step 4: Select Subgroup
-- Available subgroups will populate based on the selected group
-- Choose your subgroup to finalize the setup
+    ```env
+    NEXT_PUBLIC_GOOGLE_CLIENT_ID=your_google_client_id_here
+    ```
 
-### Step 5: View Timetable
-- Click "Continue" to view your personalized timetable
-- Your schedule will display organized by day and time slot
-- Each entry shows: Module, Instructor, and Location
+    > 📝 **Note**: You can leave this blank to run the app, but the Google Tasks Sync feature will not work.
 
-## Project Structure
+4.  **Run Development Server**:
+    ```bash
+    pnpm dev
+    ```
+    Open [http://localhost:3000](http://localhost:3000) to view the app.
 
-```
-├── app/
-│   ├── page.tsx              # Main app component with state management
-│   ├── layout.tsx            # Root layout configuration
-│   └── globals.css           # Global styles and Tailwind configuration
-├── components/
-│   ├── timetable-upload.tsx  # Upload form and selection interface
-│   └── timetable-viewer.tsx  # Timetable display component
-├── lib/
-│   └── timetable-parser.ts   # HTML parsing and filtering logic
-└── README.md                 # This file
-```
+## 📅 Usage Guide
 
-## Technical Details
+1.  **Upload**: Drag & drop your SLIIT HTML timetable file.
+2.  **Select**: Choose your `Year/Semester` -> `Group` -> `Subgroup` from the dropdowns.
+3.  **Customize**:
+    - Use the **Edit (Pencil)** icon on any class to change room numbers or times.
+    - Use **Add Class** to insert missing sessions.
+4.  **Sync**: Click **"Sync to Google Tasks"** to add your schedule to your Google account.
+5.  **Print**: Click **"Print / Save PDF"** to get a hard copy or digital PDF backup.
 
-### Components
+## 🛠️ Built With
 
-**TimetableUpload**
-- Handles HTML file upload
-- Manages semester, group, and subgroup selection
-- Validates user input before proceeding
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) & [shadcn/ui](https://ui.shadcn.com/)
+- **Auth**: [React OAuth Google](https://github.com/MomenSherif/react-oauth)
+- **Icons**: [Lucide React](https://lucide.dev/)
 
-**TimetableViewer**
-- Displays filtered timetable entries
-- Organizes entries by day and time
-- Provides reset functionality to return to upload screen
+## 🤝 Contributing
 
-### Core Logic (timetable-parser.ts)
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-**parseTimeTable(htmlContent)**
-- Extracts all semesters, groups, and subgroups from HTML
-- Returns structured data for population of dropdowns
-- Handles both standard groups and 4-digit subgroups
+## 📄 License
 
-**filterTimetable(htmlContent, targetSubgroup)**
-- Filters timetable entries for a specific subgroup
-- Extracts module, instructor, location, day, and time information
-- Returns an array of TimeTableEntry objects
+This project is open-source and available under the [MIT License](LICENSE).
 
-## Technologies
+---
 
-- **Next.js 16**: React framework with App Router
-- **React 19**: UI library with hooks for state management
-- **TypeScript**: Type-safe JavaScript
-- **Tailwind CSS**: Utility-first CSS framework
-- **shadcn/ui**: Component library built on Radix UI
-- **Lucide Icons**: SVG icon library
-
-## Timetable Format
-
-The app expects HTML timetables with the following structure:
-- Main tables containing timetable data
-- Detailed nested tables within cells for subgroup information
-- Table headers with day names (Monday-Friday)
-- Time slots in 24-hour format (HH:MM)
-- Group codes following the pattern: Y[1-4].S[1-2].[CODE].[CODE].[NUMBER]
-
-## Troubleshooting
-
-**File Upload Not Working**
-- Ensure the file is in HTML format (.html or .htm)
-- Check that the file contains valid timetable data
-
-**Groups Not Appearing**
-- Verify the HTML file contains group data for the selected semester
-- Check that group codes follow the expected format
-
-**Subgroups Not Populated**
-- Ensure the selected group has subgroups in the timetable
-- Some groups may not have subgroups
-
-## Future Enhancements
-
-- Export timetable as PDF or iCal format
-- Support for multiple timetable formats
-- Timetable sharing via QR code or link
-- Calendar integration with Google Calendar or Outlook
-- Search and filter by module name
-- Conflict detection for overlapping modules
-
-## License
-
-This project is provided as-is for educational purposes.
-
-## Support
-
-For issues or questions, please check the troubleshooting section above. If you encounter persistent problems, verify your HTML timetable format matches the expected structure.
+_Built with ❤️ for the SLIIT Community._
